@@ -101,7 +101,11 @@ router.get("/getCity", async (req, res) => {
     if (!limit || !country) {
       res.status(400).send({ message: "Send All Required Fields" });
     }
-    const data = await City.find({country}).limit(limit).select({name: 1, country: 1, population: 1}).sort({ population: -1 }).exec();
+    const data = await City.find({ country })
+      .limit(limit)
+      .select({ name: 1, country: 1, population: 1 })
+      .sort({ population: -1 })
+      .exec();
     res.status(200).send(data);
   } catch (error) {
     res.status(500).send(error.message);
